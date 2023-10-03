@@ -1,8 +1,15 @@
-import useSWR from "swr";
+"use client";
 import fetcher from "@/lib/fetcher";
+import { User } from "@prisma/client";
+import axios from "axios";
+import useSWR from "swr";
 
-const useCurrentUser = async () => {
-  const { data, error, isLoading, mutate } = useSWR("/api/current", fetcher);
+function useCurrentUser() {
+  //const fetcher = (url: string) => axios.get(url).then(res => res.data);
+  const { data, error, isLoading, mutate } = useSWR<User>(
+    "/api/current",
+    fetcher
+  );
 
   return {
     data,
@@ -10,5 +17,6 @@ const useCurrentUser = async () => {
     isLoading,
     mutate,
   };
-};
+}
+
 export default useCurrentUser;
