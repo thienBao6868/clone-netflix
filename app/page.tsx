@@ -10,6 +10,7 @@ import severAuth from "@/lib/serverAuth";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
    //const session = getServerSession(authOptions);
@@ -24,13 +25,11 @@ export default function Home() {
     },
   });
 
-  const { data: user } = useCurrentUser();
+  
 
   return (
     <>
-      <h1 className="text-6xl text-green-500">Next JS</h1>
-      <p className="text-6xl text-green-500">{user?.email}</p>
-      <Button />
+      <Navbar/>
     </>
   );
 }
