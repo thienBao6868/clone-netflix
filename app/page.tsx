@@ -1,19 +1,16 @@
 "use client";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import Button from "./components/Button";
-
-import useCurrentUser from "@/hooks/useCurrentUser";
-import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
-import severAuth from "@/lib/serverAuth";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Navbar from "./components/Navbar";
+import Billboard from "./components/Billboard";
+import MovieList from "./components/MovieList";
+import useMovieList from "@/hooks/useMovieList";
+import useFavorites from "@/hooks/useFavorites";
+import InfoModal from "./components/InfoModal";
+import useInfoModal from "@/hooks/useInfoModal";
 
 export default function Home() {
-   //const session = getServerSession(authOptions);
+  //const session = getServerSession(authOptions);
 
   // if (!session) {
   //   redirect("/auth?callbackUrl=/");
@@ -25,11 +22,19 @@ export default function Home() {
     },
   });
 
-  
+  const { data: movies = [] } = useMovieList();
+  const {data:myList = []} = useFavorites()
+  const {isOpen,closeModal}= useInfoModal()
 
   return (
     <>
-      <Navbar/>
+      <InfoModal visible={isOpen} onClose={closeModal}/>
+      <Navbar />
+      <Billboard />
+      <div className="pb-40">
+        <MovieList title="Trending Now" data={movies}/>
+        <MovieList title="My List" data={myList}/>
+      </div>
     </>
   );
 }

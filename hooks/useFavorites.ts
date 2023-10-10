@@ -4,11 +4,16 @@ import { User } from "@prisma/client";
 
 import useSWR from "swr";
 
-function useCurrentUser() {
+function useFavorites() {
   //const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data, error, isLoading, mutate } = useSWR<User>(
-    "/api/current",
-    fetcher
+    "/api/favorites",
+    fetcher,
+    {
+        revalidateIfStale:false,
+        revalidateOnFocus:false,
+        revalidateOnReconnect:false,
+    }
   );
 
   return {
@@ -19,4 +24,4 @@ function useCurrentUser() {
   };
 }
 
-export default useCurrentUser;
+export default useFavorites;

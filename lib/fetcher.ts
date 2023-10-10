@@ -1,5 +1,5 @@
 
-import { User } from "@prisma/client";
+import { Movie, User } from "@prisma/client";
 import axios from "axios";
 import { Fetcher } from "swr";
 

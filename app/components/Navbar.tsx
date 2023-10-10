@@ -16,7 +16,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY);
+      //console.log(window.scrollY);
       if (window.scrollY >= TOP_OFFSET) {
         setShowBackgroup(true);
       } else {
