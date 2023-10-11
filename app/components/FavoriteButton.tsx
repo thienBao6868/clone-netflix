@@ -4,7 +4,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorites from "@/hooks/useFavorites";
 import axios from "axios";
 interface FavoriteButtonProps {
-  movieId: string ;
+  movieId: string;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
